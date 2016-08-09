@@ -48,13 +48,13 @@ cd "/Users/*USER*/Desktop/Single Machine"
 npm install
 ```
 
-5. Install and run MongoDB locally
+4. Install and run MongoDB locally
 ```
 brew install mongodb
 mongod
 ```
 
-4. In another terminal window, run server.js
+5. In another terminal window, run server.js
 ```
 node server
 ```
@@ -64,15 +64,15 @@ node server
 #### AWS SETUP
 1. In Identity & Access Management (IAM), create a new role with **AmazonEC2FullAccess, AWSCodeDeployFullAccess,** and **AWSCodeDeployRole** policies,
 2. Create a new user called "GitHub" and grant **AWSCodeDeployFullAccess**, and save their Access Token & Secret,
-2. Launch a new Amazon Linux EC2 Instance (Free-Tier, 8GB) with the IAM role from (1), include all HTTP traffic and open SSH for your IP, 
-3. In AWS Code Deploy, create a new application and ensure app name and group are alphanumeric with _, no dashes or other characters,
-4. Create a new deployment group called "production".
+3. Launch a new Amazon Linux EC2 Instance (Free-Tier, 8GB) with the IAM role from (1), include all HTTP traffic and open SSH for your IP, 
+4. In AWS Code Deploy, create a new application and ensure app name and group are alphanumeric with _, no dashes or other characters,
+5. Create a new deployment group called "production".
 
 #### GITHUB SETUP
 1. Create GitHub token repo_deployment token in GitHub personal access settings,
 2. Create a new public or private repo,
-2. In repo settings, webhooks and services, set up **GitHub Auto-Deployment**,
-3. Then, set up **AWS CodeDeploy**, and use the IAM User "GitHub" AWS Access Key & Secret, and CodeDeploy app name and deployment group set previously.
+3. In repo settings, webhooks and services, set up **GitHub Auto-Deployment**,
+4. Then, set up **AWS CodeDeploy**, and use the IAM User "GitHub" AWS Access Key & Secret, and CodeDeploy app name and deployment group set previously.
 
 #### EC2 SETUP
 1. SSH to instance,
