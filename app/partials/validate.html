@@ -1,0 +1,45 @@
+<section class="content-wrapper blue-custom " role="main">
+    <div class="container">
+
+        <div class="row m-4x">
+            <div class="text-left">
+                <a class="navbar-brand" href="/" role="logo" aria-label="Logo">
+                    <h1 class="logo-text">SINGLE MACHINE</h1>
+                </a>
+            </div>
+        </div>
+
+        <div class="animated bounceInUp">
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <p class="t-5x bold white-text m-4x">We just need to know that you're human.</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-3 col-xs-0"></div>
+                <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12">
+                    <hr>
+
+                    <div class="center-block" style="width:300px;">
+
+                        <form method="post" ng-submit="submit()">
+                            <div vc-recaptcha
+                                 theme="'light'"
+                                 key="model.key"
+                                 on-create="setWidgetId(widgetId)"
+                                 on-success="setResponse(response)"
+                                 on-expire="cbExpiration()">
+                            </div>
+                            <button ng-disabled="!response" class="btn blue-button-4 m-4x text-center">VALIDATE</button>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

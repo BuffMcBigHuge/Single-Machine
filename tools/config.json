@@ -1,0 +1,54 @@
+{
+    "appName" : "Single Machine App",
+    "appVersion" : "1.0",
+    "apiVersion" : "/api/v1",
+    "maintenance" : false,
+    "key" : "**INTERNAL*JWT*KEY**",
+    "development": {
+        "type" : "development",
+        "port": "4040",
+        "hostname" : "localhost",
+        "mongo" : {
+            "uri" : "localhost"
+        },
+        "https" : false,
+        "loggly" : false,
+        "recaptcha" : false,
+        "mailchimp" : false
+    },
+    "production": {
+        "type" : "production",
+        "port": "80",
+        "hostname" : "**YOUR*HOST*NAME**",
+        "mongo" : {
+            "uri" : "**YOUR*MONGO*URI**"
+        },
+        "https" : false,
+        "loggly" : false,
+        "recaptcha" : false,
+        "mailchimp" : false
+    },
+    "aws" : {
+        "access_key" : "**YOUR*ACCESS*KEY**",
+        "secret_key" : "**YOUR*SECRET*KEY**",
+        "s3_bucket" : "**YOUR*BUCKET*NAME**"
+    },
+    "loggly" : {
+        "token" : "**YOUR*LOGGLY*TOKEN**",
+        "subdomain" : "**YOUR*LOGGLY*SUBDOMAIN**"
+    },
+    "google" : {
+        "recaptcha" : {
+            "uri" : "https://www.google.com/recaptcha/api/siteverify",
+            "secret" : "6Lehgh4TAAAAAHVrq_JoYwoRC3D2Z388MxmLeCAY"
+        },
+        "mail" : {
+            "user" : "**YOUR*EMAIL*FOR*PASSWORD*RESET**",
+            "pass" : "**PASSWORD**"
+        }
+    },
+    "mailchimp" : {
+        "apikey" : "**YOUR*MAILCHIMP*KEY**",
+        "list" : "**YOUR*MAILCHIMP*LIST*ID**"
+    }
+}

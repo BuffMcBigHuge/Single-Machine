@@ -1,0 +1,102 @@
+<div class="fullscreen" ng-show="loading" style="margin-top:50px">
+    <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+<section class="content-wrapper fast" ng-show="!loading" role="main">
+
+    <div class="blue-custom">
+        <div class="container pt-4x pb-4x">
+            <div class="m-4x">
+                <i class="fa fa-hand-peace-o white-text m-4x" style="font-size:100px;"></i>
+                <h1 class="white-text">YOUR PORTFOLIO</h1>
+                <p class="t-4x white-text">This is your portfolio! Congrats for getting it this far! <br> Hit the settings icon to edit. For profile pictures, you have to set up your AWS S3 bucket.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="main" class="container">
+
+        <form editable-form name="editableUser" onaftersave="saveUser()">
+
+            <div id="saveUser" class="navbar navbar-inverse navbar-fixed-top bg-white fast bottom-shadow" style="z-index:40" role="navigation" ng-show="editableUser.$visible">
+                <div class="container text-left">
+                    <button type="submit" class="btn btn-md blue-button-4 mt-1x" ng-disabled="editableUser.$waiting">
+                        SAVE
+                    </button>
+                    <button type="button" class="btn btn-md red-button-2 mt-1x" ng-disabled="editableUser.$waiting" ng-click="editableUser.$cancel(); cancelEdit()">
+                        CANCEL
+                    </button>
+                </div>
+            </div>
+
+            <div class="row p-2x mt-1x">
+
+                <!-- SETTINGS -->
+
+                <div class="pull-right" ng-show="!editMode">
+                    <div class="dropdown">
+                        <button class="btn white-button-3 bold t-1x dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-gear"></i> SETTINGS</button>
+                        <ul class="dropdown-menu-right text-center bottom-shadow dropdown-menu blue-text-custom" style="opacity: 0; display: none; transform: scaleX(1) scaleY(1) translateY(0px); transform-origin: 50% 50% 0px;">
+                            <li><a href="#" class="blue-text-custom" ng-click="editableUser.$show(); startEdit()">EDIT</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#" class="dropdown-logout" ng-click="logout()">LOGOUT</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                    <!-- USER PICTURE -->
+
+                    <div ng-cloak ng-show="editMode" class="form-group">
+                        <img ng-click="editProfilePicture()" ng-if="!data.user.picture" ng-hide="myImage || imageLoading" class="profile-img" src="/images/defaults/500x500.jpg">
+                        <img ng-click="editProfilePicture()" ng-show="!imageLoading" ng-if="data.user.picture" class="profile-img" src="{{data.user.picture || '/images/defaults/500x500.jpg'}}" />
+                        <span ng-show="imageLoading" class="profile-img center-block m-2x"><i class="fa fa-refresh fa-spin fa-3x fa-fw grey-text-custom" aria-hidden="true"></i></span>
+                        <img ng-click="editProfilePicture()" ng-if="!data.user.picture" ng-hide="myImage || imageLoading" src="/images/other_images/profile_picture_image.png" style="position:absolute;width:150px;">
+                    </div>
+
+                    <div ng-cloak ng-show="!editMode" class="form-group">
+                        <img ng-if="!data.user.picture" ng-click="editableUser.$show(); startEdit(); editProfilePicture()" ng-hide="myImage" class="profile-img" src="/images/defaults/500x500.jpg">
+                        <img class="profile-img" ng-click="editableUser.$show(); startEdit(); editProfilePicture()" ng-if="data.user.picture" src="{{data.user.picture || '/images/defaults/500x500.jpg'}}" />
+                        <img ng-click="editableUser.$show(); startEdit(); editProfilePicture()" ng-if="!data.user.picture" ng-hide="myImage || imageLoading" src="/images/other_images/profile_picture_image.png" style="position:absolute;width:150px;">
+                    </div>
+
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+                    <div style="padding: 0 20% 0 20%;">
+
+                        <!-- USER NAME -->
+                        <div class="form-group no-margin pb-2x">
+                            <h6 class="bold grey-dark-text-custom" ng-show="editableUser.$visible">Full Name</h6>
+                            <span id="firstName" class="profile-font mr-1x" editable-text="data.user.displayName.firstName" e-name="firstName" e-placeholder="First Name" onbeforesave="checkData($data, 'first name')">{{data.user.displayName.firstName}}</span>
+                            <span id="middleName" class="profile-font mr-1x" editable-text="data.user.displayName.middleName" e-name="middleName" e-placeholder="Middle Name" ng-hide="(!editMode && !data.user.displayName.middleName)">{{data.user.displayName.middleName}}</span>
+                            <span id="lastName" class="profile-font mr-1x" editable-text="data.user.displayName.lastName" e-name="lastName" e-placeholder="Last Name" onbeforesave="checkData($data, 'last name')">{{data.user.displayName.lastName}}</span>
+                        </div>
+
+                        <!-- EMAIL -->
+                        <div class="form-group no-margin pb-2x">
+                            <h6 class="bold grey-dark-text-custom" ng-show="editableUser.$visible">Email</h6>
+                            <span id="email" class="mr-1x" editable-text="data.user.email" e-name="email" e-placeholder="Email" onbeforesave="checkData($data, 'email')">{{data.user.email}}</span>
+                        </div>
+
+                        <!-- BIO -->
+                        <div class="form-group no-margin pb-2x">
+                            <h6 class="bold grey-dark-text-custom" ng-show="editableUser.$visible">BIO</h6>
+                            <span rows="5" cols="10" editable-textarea="data.user.bioSummary" e-name="bioSummary" e-placeholder="Bio Summary">{{data.user.bioSummary}}</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-0"></div>
+            </div>
+
+        </form>
+
+    </div>
+</section>

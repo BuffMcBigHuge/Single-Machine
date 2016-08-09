@@ -1,0 +1,65 @@
+<div class="fullscreen" ng-show="loading" style="margin-top:50px">
+    <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+<section class="content-wrapper velocity-transition-fadeIn velocity-duration-500" ng-show="!loading" role="main">
+
+    <div style="min-height: 800px;" class="velocity-transition-fadeIn velocity-duration-500" >
+
+        <div class="blue-custom">
+            <div class="container pt-4x pb-4x">
+
+                <div class="m-4x">
+                    <i class="fa fa-user white-text m-4x" style="font-size:100px;"></i>
+                    <h1 class="white-text">USER PORTFOLIO</h1>
+                    <p class="t-4x white-text">This is a user's retrieved portfolio.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container">
+
+            <!-- USER -->
+            <div class="row p-2x">
+
+                <!-- USER PICTURE -->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-4x">
+                    <div class="form-group mt-4x">
+                        <img class="profile-img" src="{{data.user.picture || '/images/defaults/500x500.jpg'}}" />
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div style="padding: 0 20% 0 20%;">
+
+                        <!-- USER NAME -->
+                        <div class="form-group no-margin pb-2x">
+                            <span id="firstName" class="profile-font mr-1x" >{{data.user.displayName.firstName}}</span>
+                            <span id="middleName" class="profile-font mr-1x">{{data.user.displayName.middleName}}</span>
+                            <span id="lastName" class="profile-font mr-1x">{{data.user.displayName.lastName}}</span>
+                        </div>
+
+                        <!-- EMAIL -->
+                        <div class="form-group no-margin pb-2x">
+                            <span id="email" class="mr-1x">{{data.user.email || 'No Email'}}</span>
+                        </div>
+
+                        <!-- BIO -->
+                        <div class="form-group no-margin pb-2x">
+                            <span id="bioSummary" class="mr-1x">{{data.user.bioSummary || 'No Bio Summary'}}</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-0"></div>
+            </div>
+
+        </div>
+    </div>
+
+</section>

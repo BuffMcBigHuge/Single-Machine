@@ -1,0 +1,70 @@
+<div class="fullscreen" ng-show="loading" style="margin-top:50px">
+    <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+<section class="content-wrapper blue-custom velocity-transition-fadeIn velocity-duration-500" ng-show="!loading" role="main">
+
+
+    <div style="min-height: 800px;" class="velocity-transition-fadeIn velocity-duration-500" >
+
+        <div class="blue-custom">
+            <div class="container pt-4x pb-4x">
+
+                <div class="m-4x">
+                    <i class="fa fa-child white-text m-4x" style="font-size:100px;"></i>
+                    <h1 class="white-text">Welcome to the USER LIST</h1>
+                    <p class="t-4x white-text">Here we retrieve all the users found in the system.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="bg-light">
+            <div class="container pt-4x pb-4x">
+
+                <h4 class="text-left">USERS</h4>
+                <h5 class="light white-text m-2x" ng-show="userList.length == 0">No users</h5>
+
+                <div class="row p-1x">
+                    <div ng-show="userList.length > 0" class="col col-xs-12 col-sm-6 col-md-6 col-lg-6" ng-repeat="userElement in userList">
+
+                        <div class="panel panel-default hover-zoom animated fadeIn m-2x p-2x" style="height:200px;overflow:hidden;">
+
+                            <a href="/user/{{userElement.id}}">
+
+                                <div class="row text-left m-4x">
+                                    <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+                                        <img class="profile-img" ng-src="{{userElement.picture || 'images/defaults/500x500.jpg'}}">
+                                    </div>
+                                    <div class="col-lg-10 col-md-9 col-sm-9 col-xs-9">
+                                        <div class="row p-1x pull-left text-left">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-left">
+                                                <span id="firstName" class="baskerville-font black-text mr-1x t-5x" >{{userElement.displayName.firstName}}</span>
+                                                <span id="middleName" class="baskerville-font black-text mr-1x t-5x" ng-hide="(!userElement.displayName.middleName)">{{userElement.displayName.middleName}}</span>
+                                                <span id="lastName" class="baskerville-font black-text mr-1x t-5x" >{{userElement.displayName.lastName}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="row p-1x">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right">
+                                        <span class="grey-text-custom t-2x">
+                                            Email: {{userElement.email}}
+                                        </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

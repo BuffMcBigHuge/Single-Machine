@@ -1,0 +1,45 @@
+version: 0.0
+
+os: linux
+
+files:
+  - source: /
+    destination: /var/www/single_machine
+
+permissions:
+  - object: /var/www/single_machine
+    mode: 755
+    acls:
+      - "d:u::rwx"
+      - "d:g::rwx"
+      - "d:o::rwx"
+    owner: ec2-user
+    type:
+      - directory
+  - object: /var/www/single_machine/logs
+    mode: 777
+    acls:
+      - "d:u::rwx"
+      - "d:g::rwx"
+      - "d:o::rwx"
+    owner: ec2-user
+    type:
+      - directory
+
+hooks:
+  AfterInstall:
+    - location: scripts/autoinstall.sh
+      timeout: 1000
+      runas: root
+  ApplicationStart:
+    - location: scripts/autostart.sh
+      timeout: 300
+      runas: ec2-user
+  ApplicationStop:
+    - location: scripts/autostop.sh
+      timeout: 300
+      runas: ec2-user
+  ValidateService:
+    - location: scripts/autovalidate.sh
+      timeout: 15
+      runas: ec2-user

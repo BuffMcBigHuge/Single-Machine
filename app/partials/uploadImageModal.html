@@ -1,0 +1,117 @@
+<div class="modal fade">
+
+    <form name="editable">
+
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Upload Image</h4>
+                </div>
+
+                <div class="modal-body" ng-show="imageLoading">
+                    <span class="profile-img center-block m-2x grey-text-custom"><i class="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i></span>
+                </div>
+
+                <div class="modal-body" ng-hide="imageLoading">
+
+                    <span class="btn btn-file blue-button-4 m-2x width-70">
+                        <span ng-show="!myImageFile" class="fileinput-new">SELECT A FILE</span>
+                        <span ng-show="myImageFile">SELECT ANOTHER FILE</span>
+                        <input id="imageInput" name="imageInput" ngf-change="handleFileSelect($file)"
+                               ngf-select ng-model="myImageFile" ngf-multiple="false" ngf-accept="'image/*'" ngf-fix-orientation="true" ngf-validate="{size:{min: 10, max: '8000KB'}, width:{min: 250, max:8000}, height:{min: 250, max: 8000}, pattern:'.png,.jpg,.jpeg,image/*'}" >
+                    </span>
+
+                    <span class="editable-error help-block" ng-if="editable.imageInput.$error.maxSize">File size should be less than 8MB.</span>
+                    <span class="editable-error help-block" ng-if="editable.imageInput.$error.maxWidth || editable.imageInput.$error.maxHeight">File dimensions should be less than 8000px.</span>
+                    <span class="editable-error help-block" ng-if="editable.imageInput.$error.minWidth || editable.imageInput.$error.minHeight">File dimensions should be greater than 250px.</span>
+
+                    <div class="row animated fadeIn m-2x">
+                        <div class="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
+                        <div class="col-lg-8 col-md-8 col-sm-10 col-xs-12">
+                            <div ng-show="myImage">
+                                <div ng-hide="imageLoading">
+                                    <img id="image" src="{{myImage}}" style="max-width:100%;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
+                    </div>
+
+                    <!--
+                         <div ng-show="myImage && !imageLoading">
+                            <img-croppie src="myImage"
+                                        ng-model="myCroppedImage"
+                                        update="onUpdate"
+                                        dimensions="data.dimensions"
+                                        mousezoom="true"
+                                        zoom="true"
+                                        type="square"
+                                        orientation="data.orientation">
+                            </img-croppie>
+                        </div>
+                    -->
+
+                </div>
+
+                <div class="modal-footer bg-white">
+                    <!--button type="button" class="btn green-button-2" ng-click="rotateImage()"><i class="fa fa-rotate-right text-muted"></i></button>-->
+                    <div ng-show="data.width && data.height">
+                        <h5>Recommended: {{data.width}} (w) x {{data.height}} (h)</h5>
+                    </div>
+
+                    <div class="text-center" ng-if="!imageLoading && myImage">
+                        <button type="button" class="btn blue-button-4" ng-click="scaleY()">
+                            <i class="fa fa-arrows-v"></i>
+                        </button>
+                        <button type="button" class="btn blue-button-4" ng-click="scaleX()">
+                            <i class="fa fa-arrows-h"></i>
+                        </button>
+                        <button type="button" class="btn blue-button-4" ng-click="cropper.rotate(90)">
+                            <i class="fa fa-repeat"></i>
+                        </button>
+                        <button type="button" class="btn blue-button-4" ng-click="cropper.reset()">
+                            <i class="fa fa-refresh"></i>
+                        </button>
+                        <button type="submit" class="btn btn-md blue-button-4 width-30" ng-click="getImage()" type="button" class="btn black-button-1" data-dismiss="modal">
+                            SAVE
+                        </button>
+                        <button type="button" class="btn btn-md red-button-2 width-30" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">
+                            CANCEL
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+<!--
+        <div ng-if="!imageLoading && myImage" class="navbar navbar-fixed-bottom bg-white velocity-opposites-transition-slideUpIn" style="z-index:60;margin-bottom:0px!important" data-velocity-opts="{duration: 200}" role="navigation" >
+            <div class="container">
+
+                <button type="button" class="btn white-button-3" ng-click="scaleY()">
+                    <i class="fa fa-arrows-v"></i>
+                </button>
+                <button type="button" class="btn white-button-3" ng-click="scaleX()">
+                    <i class="fa fa-arrows-h"></i>
+                </button>
+                <button type="button" class="btn white-button-3" ng-click="cropper.rotate(90)">
+                    <i class="fa fa-repeat"></i>
+                </button>
+                <button type="button" class="btn white-button-3" ng-click="cropper.reset()">
+                    <i class="fa fa-refresh"></i>
+                </button>
+                <button type="submit" class="btn btn-md blue-button-4" ng-click="getImage()" type="button" class="btn black-button-1" data-dismiss="modal">
+                    SAVE
+                </button>
+                <button type="button" class="btn btn-md red-button-2" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">
+                    CANCEL
+                </button>
+            </div>
+        </div>
+
+        -->
+
+    </form>
+
+</div>
