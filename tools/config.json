@@ -40,7 +40,7 @@
     "google" : {
         "recaptcha" : {
             "uri" : "https://www.google.com/recaptcha/api/siteverify",
-            "secret" : "6Lehgh4TAAAAAHVrq_JoYwoRC3D2Z388MxmLeCAY"
+            "secret" : "**YOUR*RECAPTCHA*SECRET**"
         },
         "mail" : {
             "user" : "**YOUR*EMAIL*FOR*PASSWORD*RESET**",
