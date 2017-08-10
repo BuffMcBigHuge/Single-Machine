@@ -100,7 +100,7 @@ router.get('/profile/:userId', function (req, res) {
         if (err)
             return log(err, {'status': 500, method : method, endPoint: endPoint}, req, res);
 
-        if (users.length == 0)
+        if (users.length === 0)
             return log({message: 'User not found'}, {'status': 400, method : method, endPoint: endPoint}, req, res);
 
         var userProfile = users[0];
@@ -120,7 +120,7 @@ router.get('/all', ensureAuthenticated, function(req, res) {
     var endPoint = '/user/all';
     var method = 'GET';
 
-    User.find({isBusiness : false, isValid : true}, function(err, users){
+    User.find({isValid : true}, function(err, users){
 
         if (err)
             return log(err, {'status': 500, method : method, endPoint: endPoint}, req, res);

@@ -55,7 +55,7 @@ angular.module('MyApp')
                 });
 
                 // Check if user is not valid && check if user is not authenticated
-                if ((!$scope.isValid()) && ($scope.isAuthenticated()) && (validationRedirect == false)) {
+                if ((!$scope.isValid()) && ($scope.isAuthenticated()) && (!validationRedirect)) {
 
                     $scope.loading = true;
 

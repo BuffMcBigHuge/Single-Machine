@@ -115,10 +115,10 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngFileUpload', 'toastr', '
             preventOpenDuplicates: true,
             messageClass: 'toast-message',
             newestOnTop: true,
-            positionClass: 'toast-bottom-center',
+            positionClass: 'toast-top-center',
             timeOut: 3000,
             titleClass: 'toast-title',
-            toastClass: 'toast velocity-enter-transition-FadeIn velocity-leave-transition-slideDownBigOut'
+            toastClass: 'toast velocity-enter-transition-FadeIn velocity-leave-transition-slideUpBigOut'
         });
 
         $compileProvider.debugInfoEnabled(false);

@@ -16,8 +16,6 @@ gulp.task('minify-js',function(){
     return gulp.src([
         'app/app.js',
         'app/controllers/*.js',
-        'app/controllers/**/*.js',
-        'app/directives/*.js',
         'app/factory/*.js',
         'app/services/*.js',
         'app/components/*.js'

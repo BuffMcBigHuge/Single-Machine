@@ -34,23 +34,11 @@
 
             <div class="row p-2x mt-1x">
 
-                <!-- SETTINGS -->
-
-                <div class="pull-right" ng-show="!editMode">
-                    <div class="dropdown">
-                        <button class="btn white-button-3 bold t-1x dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-gear"></i> SETTINGS</button>
-                        <ul class="dropdown-menu-right text-center bottom-shadow dropdown-menu blue-text-custom" style="opacity: 0; display: none; transform: scaleX(1) scaleY(1) translateY(0px); transform-origin: 50% 50% 0px;">
-                            <li><a href="#" class="blue-text-custom" ng-click="editableUser.$show(); startEdit()">EDIT</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#" class="dropdown-logout" ng-click="logout()">LOGOUT</a></li>
-                        </ul>
-                    </div>
-                </div>
+                <a href="#" class="blue-text-custom pull-right" ng-hide="editableUser.$visible" ng-click="editableUser.$show(); startEdit()"><i class="fa fa-gear"></i> EDIT</a>
 
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
                     <!-- USER PICTURE -->
-
                     <div ng-cloak ng-show="editMode" class="form-group">
                         <img ng-click="editProfilePicture()" ng-if="!data.user.picture" ng-hide="myImage || imageLoading" class="profile-img" src="/images/defaults/500x500.jpg">
                         <img ng-click="editProfilePicture()" ng-show="!imageLoading" ng-if="data.user.picture" class="profile-img" src="{{data.user.picture || '/images/defaults/500x500.jpg'}}" />
@@ -72,15 +60,15 @@
                         <!-- USER NAME -->
                         <div class="form-group no-margin pb-2x">
                             <h6 class="bold grey-dark-text-custom" ng-show="editableUser.$visible">Full Name</h6>
-                            <span id="firstName" class="profile-font mr-1x" editable-text="data.user.displayName.firstName" e-name="firstName" e-placeholder="First Name" onbeforesave="checkData($data, 'first name')">{{data.user.displayName.firstName}}</span>
-                            <span id="middleName" class="profile-font mr-1x" editable-text="data.user.displayName.middleName" e-name="middleName" e-placeholder="Middle Name" ng-hide="(!editMode && !data.user.displayName.middleName)">{{data.user.displayName.middleName}}</span>
-                            <span id="lastName" class="profile-font mr-1x" editable-text="data.user.displayName.lastName" e-name="lastName" e-placeholder="Last Name" onbeforesave="checkData($data, 'last name')">{{data.user.displayName.lastName}}</span>
+                            <div id="firstName" class="profile-font mt-1x" editable-text="data.user.displayName.firstName" e-name="firstName" e-placeholder="First Name" onbeforesave="checkData($data, 'first name')">{{data.user.displayName.firstName}}</div>
+                            <div id="middleName" class="profile-font mt-1x" editable-text="data.user.displayName.middleName" e-name="middleName" e-placeholder="Middle Name" ng-hide="(!editMode && !data.user.displayName.middleName)">{{data.user.displayName.middleName}}</div>
+                            <div id="lastName" class="profile-font mt-1x" editable-text="data.user.displayName.lastName" e-name="lastName" e-placeholder="Last Name" onbeforesave="checkData($data, 'last name')">{{data.user.displayName.lastName}}</div>
                         </div>
 
                         <!-- EMAIL -->
                         <div class="form-group no-margin pb-2x">
                             <h6 class="bold grey-dark-text-custom" ng-show="editableUser.$visible">Email</h6>
-                            <span id="email" class="mr-1x" editable-text="data.user.email" e-name="email" e-placeholder="Email" onbeforesave="checkData($data, 'email')">{{data.user.email}}</span>
+                            <div id="email" class="mt-1x" editable-text="data.user.email" e-name="email" e-placeholder="Email" onbeforesave="checkData($data, 'email')">{{data.user.email}}</div>
                         </div>
 
                         <!-- BIO -->
