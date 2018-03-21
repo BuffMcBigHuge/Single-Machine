@@ -4,8 +4,7 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngFileUpload', 'toastr', '
         $stateProvider
             .state('main', {
                 url: '/',
-                templateUrl: '/partials/signup.html'
-
+                templateUrl: '/partials/home.html'
             })
             .state('signup', {
                 url: '/signup',
