@@ -1,0 +1,23 @@
+{
+  "name": "Single Machine",
+  "short_name": "Single Machine",
+  "description": "A boilerplate MEAN app on a single server.",
+  "version": "1.1",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "icons": [],
+  "display": "standalone",
+  "background_color": "#494949",
+  "theme_color": "#2f92d2",
+  "orientation": "portrait",
+  "app": {
+    "urls": [
+      "https://genm.co/"
+    ],
+    "launch": {
+      "web_url": "https://genm.co/dashboard"
+    }
+  },
+  "start_url": ".",
+  "gcm_sender_id": ""
+}

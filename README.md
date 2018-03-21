@@ -64,7 +64,7 @@ node server
 #### AWS SETUP
 1. In Identity & Access Management (IAM), create a new role with **AmazonEC2FullAccess, AWSCodeDeployFullAccess,** and **AWSCodeDeployRole** policies,
 2. Create a new user called "GitHub" and grant **AWSCodeDeployFullAccess**, and save their Access Token & Secret,
-3. Launch a new Amazon Linux EC2 Instance (Free-Tier, 8GB) with the IAM role from (1), include all HTTP traffic and open SSH for your IP, 
+3. Launch a new Amazon Linux AMI EC2 Instance (Free-Tier, 8GB) with the IAM role from (1), include all HTTP traffic and open SSH for your IP, 
 4. In AWS Code Deploy, create a new application and ensure app name and group are alphanumeric with _, no dashes or other characters,
 5. Create a new deployment group called "production".
 
@@ -81,23 +81,22 @@ sudo chmod 600 *KEYNAME*.pem
 ssh -i keys/*KEYNAME*.pem ec2-user@*EC2PUBLICDNS*
 ```
 
-2. Upgrade System (YUM/APT-GET),
+2. Upgrade System (YUM),
 ```
-sudo apt-get update
-sudo apt-get -y upgrade
 sudo yum update
 ```
 
 3. Install NodeJS,
 ```
-sudo su - 
-curl --silent --location https://rpm.nodesource.com/setup | bash -
-sudo yum install nodejs
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+. ~/.nvm/nvm.sh
+nvm install --lts
+sudo ln -s /usr/local/bin/node /usr/bin/node
+sudo ln -s /usr/local/bin/npm /usr/bin/npm
 ```
 
 4. Install Code Deploy Agent,
 ```
-sudo yum update
 sudo yum install ruby
 sudo yum install wget
 cd /home/ec2-user
@@ -109,10 +108,23 @@ sudo service codedeploy-agent status
 
 5. Install PM2,
 ```
+npm install pm2 -g
+sudo su -
 sudo npm install pm2 -g
+exit
+sudo ln -s /usr/local/bin/pm2 /usr/bin/pm2
 ```
 
-6. Open Port 80 Listening,
+6. Install GULP,
+```
+npm install gulp -g
+sudo su -
+sudo npm install gulp -g
+exit
+sudo ln -s /usr/local/bin/gulp /usr/bin/gulp
+```
+
+8. Open Port 80 Listening,
 ```
 sudo yum install libcap2-bin
 sudo setcap cap_net_bind_service=+ep `readlink -f \`which node\``

@@ -5,7 +5,7 @@ angular.module('MyApp')
         $scope.loading = true;
 
         $scope.goToProfile = function(profileData) {
-            $state.go("other-profile",{
+            $state.go("other-profile", {
                 userId : profileData
             });
         };

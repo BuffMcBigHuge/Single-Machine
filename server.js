@@ -1,6 +1,6 @@
 /**
  * SINGLE MACHINE Server
- * (c) 2016
+ * (c) 2018
  */
 
 'use strict';
@@ -12,7 +12,7 @@
  * /___/_/_//_/\_, /_/\__/ /_/_/_/\_,_/\__/_//_/_/_//_/\__/
  *            /___/
  *
- *    App: Single Machine v1.0
+ *    App: Single Machine v1.1
  *    Engineer: Marco Domenico Tundo - marco@bymar.co
  *    Web: http://singlemachine.bymar.co
  *
@@ -23,6 +23,7 @@ var express = require('express');
 var jwt = require('jwt-simple');
 var sm = require('sitemap');
 var cors = require('cors');
+var fs = require('fs');
 
 var auth = require('./api/auth.js');
 var user = require('./api/user.js');
@@ -56,6 +57,23 @@ app.use(config.apiVersion + '/upload', upload);
 
 /**
  |--------------------------------------------------------------------------
+ | Expiry
+ |--------------------------------------------------------------------------
+ */
+app.get('/*', function (req, res, next) {
+    if (req.url.indexOf("/stylesheets/") >= 0) {
+        res.setHeader("Cache-Control",  "max-age=0, no-cache, no-store, must-revalidate");
+        res.setHeader("Pragma", "no-cache");
+    }
+    if ((req.url.indexOf("/images/")) >= 0) {
+        res.setHeader("Cache-Control", "public, max-age=604800");
+        res.setHeader("Expires", new Date(Date.now() + 604800000).toUTCString());
+    }
+    next();
+});
+
+/**
+ |--------------------------------------------------------------------------
  | S3
  |--------------------------------------------------------------------------
  */
@@ -69,10 +87,15 @@ app.get('/u/:id/:pid', function(req, res) {
  | HTTPS
  |--------------------------------------------------------------------------
  */
-if ((environment.type == 'production') && (environment.https)) {
+app.use(express.static('views'));
+app.set('views', __dirname + '/views');
+
+if (environment.type === 'production') {
+
     // Redirect to HTTPS
+
     app.use(function (req, res, next) {
-        if ((!req.secure) && (req.get('X-Forwarded-Proto') !== 'https') && (req.url != '/healthcheck'))
+        if ((!req.connection.encrypted) && (req.get('X-Forwarded-Proto') !== 'https') && (req.url != '/healthcheck') && (req.url != (config.apiVersion + 'peerjs')))
             res.redirect('https://' + req.get('Host') + req.url);
         else
             next();
@@ -93,6 +116,24 @@ var sitemap = sm.createSitemap ({
         { url: '/page',  changefreq: 'weekly',  priority: 0.9 },
         { url: '/other-page', changefreq: 'weekly',  priority: 0.9}*/
     ]
+});
+
+/**
+ |--------------------------------------------------------------------------
+ | MANIFEST
+ |--------------------------------------------------------------------------
+ */
+app.get('/manifest.json', function(req, res) {
+    res.send(fs.readFileSync('./tools/manifest.json'));
+});
+
+/**
+ |--------------------------------------------------------------------------
+ | ROBOTS.TXT
+ |--------------------------------------------------------------------------
+ */
+app.get('/robots.txt', function(req, res) {
+    res.send(fs.readFileSync('./tools/robots.txt'));
 });
 
 /**

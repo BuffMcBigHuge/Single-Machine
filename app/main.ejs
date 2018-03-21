@@ -10,14 +10,14 @@
 
     <link rel="icon" type="image/png" href="images/favicons/favicon.png" sizes="192x192">
     <meta name="theme-color" content="#ffffff">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 
     <!-- STYLESHEETS -->
     <link rel="stylesheet" href="/stylesheets/wrapkit.css">
-    <link rel="stylesheet" href="/stylesheets/xeditable.css">
     <link rel="stylesheet" href="/stylesheets/bootstrap.css">
     <link rel="stylesheet" href="/stylesheets/angular-toastr.css">
     <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/xeditable.css">
     <link rel="stylesheet" href="/stylesheets/cropper.css">
 
     <!-- GULP: COMMENT OUT THE ABOVE STYLESHEETS IF USING GENERATED MAIN.CSS -->
@@ -42,10 +42,10 @@
         <div class="container-fluid blue-custom">
 
             <div style="position:absolute;">
-                <a class="navbar-brand" href="#">
-                    <span class="white-text t-5x avenir-font">SINGLE MACHINE</span>
+                <a class="navbar-brand" href="/">
+                    <span class="white-text t-5x bold no-underline">SINGLE MACHINE</span>
                 </a>
-                <span class="light white-text pull-left" style="height:50px;padding-top:15px;">BETA</span>
+                <span class="light white-text pull-right ml-2x" style="height:50px;padding-top:15px;">BOILERPLATE</span>
             </div>
 
             <div class="dropdown pull-right blue-custom">
@@ -64,7 +64,7 @@
             <div class="collapse navbar-collapse pull-right">
                 <ul class="nav navbar-nav">
                     <li><a href="/list"><button class="btn btn-block transparent white-text regular t-1x">USER LIST</button></a></li>
-                    <li class="pt-1x"><span class="white-text t-7x"> | </span></li>
+                    <li class="pt-1x"><span class="white-text t-5x"> | </span></li>
                     <li><a href="/portfolio" class="no-padding-right"><button class="btn btn-block transparent white-text regular t-1x">PORTFOLIO</button></a></li>
                     <li><a href="/about" class="no-padding-left"><button class="btn btn-block transparent white-text regular t-1x">ABOUT</button></a></li>
                     <li><a href="/logout" class="no-padding-left"><button class="btn btn-block transparent white-text regular t-1x">LOGOUT</button></a></li>
@@ -124,6 +124,130 @@
         <div device-detector id="device-firefoxos"></div>
     </footer>
 
+
+    <!-- SIGNUP MODAL -->
+    <div class="modal fade" id="signup" tabindex="-1" role="dialog">
+
+        <div class="modal-dialog" style="z-index:21;" role="document">
+            <div class="modal-content p-2x">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h1 class="text-center t-6x bold p-2x">SIGN UP</h1>
+
+                <form class="p-2x" method="post" ng-submit="signUp()" name="signupForm" form-autofill-fix>
+
+                    <div class="form-group text-left">
+
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 no-padding">
+                                <div class="input-group input-group-in form-control">
+                                    <span class="input-group-addon blue-text-custom"><i class="fa fa-user"></i></span>
+                                    <input class="form-control" type="text" name="firstName" ng-model="firstName" placeholder="Your First Name" required autofocus>
+                                    <span class="form-control-feedback"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 no-padding">
+                                <div class="input-group input-group-in form-control">
+                                    <input class="form-control"  type="text" name="lastName" ng-model="lastName" placeholder="Your Last Name" required autofocus>
+                                    <span class="form-control-feedback"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="editable-error help-block" ng-if="signupForm.firstName.$dirty">
+                            <div ng-show="signupForm.firstName.$error.required">Please enter your first name.</div>
+                        </div>
+                        <div class="editable-error help-block" ng-if="signupForm.lastName.$dirty">
+                            <div ng-show="signupForm.lastName.$error.required">YPlease enter your last name.</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group text-left">
+                        <div class="input-group input-group-in form-control">
+                            <span class="input-group-addon blue-text-custom"><i class="fa fa-envelope"></i></span>
+                            <input class="form-control"  type="email" name="email" ng-model="user.email" placeholder="Your Best Email" required>
+                            <span class="form-control-feedback"></span>
+                        </div>
+
+                        <div class="editable-error help-block" ng-if="signupForm.email.$dirty">
+                            <div ng-show="signupForm.email.$error.required">Your email address is required.</div>
+                            <div ng-show="signupForm.email.$error.email">Not a valid email.</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group text-left">
+                        <div class="input-group input-group-in form-control">
+                            <span class="input-group-addon blue-text-custom"><i class="fa fa-lock"></i></span>
+                            <input class="form-control"  type="password" name="password" ng-model="user.password" placeholder="Your Password" required>
+                            <span class="form-control-feedback"></span>
+                        </div>
+                        <div class="editable-error help-block" ng-if="signupForm.password.$dirty">
+                            <div ng-show="signupForm.password.$error.required">Please enter your password.</div>
+                        </div>
+                    </div>
+
+                    <div class="animated-hue center-block">
+                        <button type="submit" ng-disabled="signupForm.$invalid" class="btn blue-button-4 black-text regular letter-spacing-1 m-2x">SIGN UP</button>
+                        <h6 class="text-center mt-3x">By clicking on Sign up, you agree to terms & conditions and privacy policy</h6>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- LOGIN MODAL -->
+    <div class="modal fade" id="login" tabindex="-1" role="dialog">
+
+        <div class="modal-dialog" style="z-index:21;" role="document">
+            <div class="modal-content p-2x">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                <h1 class="p-2x bold t-6x">WELCOME BACK</h1>
+
+                <form class="p-2x" method="post" ng-submit="login()" name="loginForm" form-autofill-fix>
+
+                    <div class="form-group">
+                        <div class="input-group input-group-in">
+                            <span class="input-group-addon blue-text-custom"><i class="fa fa-envelope"></i></span>
+                            <input class="form-control input-lg" id="email" type="email" name="email" ng-model="user.email" placeholder="Your Email" required>
+                            <span class="form-control-feedback"></span>
+                        </div>
+
+                        <div class="editable-error help-block" ng-if="loginForm.email.$dirty">
+                            <div ng-show="loginForm.email.$error.required">Your email address is required.</div>
+                            <div ng-show="loginForm.email.$error.email">Not a valid email.</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group input-group-in">
+                            <span class="input-group-addon blue-text-custom"><i class="fa fa-lock"></i></span>
+                            <input class="form-control input-lg" id="password" type="password" name="password" ng-model="user.password" placeholder="Your Password" required>
+                            <span class="form-control-feedback"></span>
+                        </div>
+                        <div class="editable-error help-block" ng-if="loginForm.password.$dirty">
+                            <div ng-show="loginForm.password.$error.required">Please enter your password.</div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix">
+                        <div class="animated-hue center-block">
+                            <button type="submit" ng-disabled="loginForm.$invalid" class="btn blue-button-4 black-text regular letter-spacing-1 m-2x">LOG IN</button>
+                            <h6 class="mt-4x">Don't have an account yet? <a class="black-link" ng-click="switchSignUp()">Sign Up</a></h6>
+                            <h6>Forgot your password? <a class="black-link" ng-click="resetPassword()">Reset Password</a></h6>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- BACKDROP -->
+    <div class="page-backdrop"></div>
+
 </main>
 
 <!-- SCRIPTS -->
@@ -140,9 +264,6 @@
 <script src="/scripts/utilities/bootstrap.js"></script>
 <script src="/scripts/utilities/bootstrap-editable.js"></script>
 <script src="/scripts/utilities/cropper.js"></script>
-
-<!-- WRAPKIT -->
-<script src="/scripts/wrapkit/plugin-setups.js"></script>
 
 <!-- ANGULAR -->
 <script src="/scripts/angular/angular.js"></script>
@@ -172,7 +293,6 @@
 <script src="/controllers/validate.js"></script>
 <script src="/controllers/modal.js"></script>
 <script src="/controllers/portfolio.js"></script>
-<script src="/controllers/signup.js"></script>
 <script src="/controllers/userPortfolio.js"></script>
 <script src="/controllers/list.js"></script>
 <script src="/controllers/requestPasswordReset.js"></script>

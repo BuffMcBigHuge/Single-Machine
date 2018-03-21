@@ -56,7 +56,6 @@ Helpers = {
 
     log : function(result, data, req, res) {
 
-        // Logs and completes return for all API calls
         // log(users, {'status': 200, method : method, endPoint: endPoint}, req, res);
 
         if (!data)
@@ -64,34 +63,77 @@ Helpers = {
 
         // USER
         if ((!req.user) || (typeof req.user.id === 'undefined'))
-           data.userId = 'unknown';
+            data.userId = null;
         else
             data.userId = req.user.id;
 
         // STATUS
-        if ([500, 404, 403, 409, 400].indexOf(data.status) > -1)
+
+        // 500 Internal Server Error
+        // 404 Not Found
+        // 403 Forbidden
+        // 409 Conflict
+        // 400 Bad Request
+
+        if (!data.status) {
+            data.status = 'unknown';
+            data.level = 'unknown';
+        }
+        else if (data.status >= 500) {
+            data.status = data.status.toString();
             data.level = 'error';
-        else
+        }
+        else if ([404, 403, 409, 400].indexOf(data.status) > -1) {
+            data.status = data.status.toString();
+            data.level = 'warn';
+        }
+        else {
+            try {
+                data.status = data.status.toString();
+            } catch(e) {}
             data.level = 'success';
+        }
 
         // ENDPOINT
         data.endPoint = config.apiVersion + data.endPoint;
 
         // HEADERS
-        data.headers = req.headers;
+        // data.headers = req.headers;
 
-        if (environment.type == "development") {
+        // MESSAGE
+        if (!result)
+            data.message = data.level;
+        else if ((typeof result !== 'undefined') && (result.message))
+            data.message = result.message;
+        else if ((typeof result !== 'undefined') && (typeof result.data !== 'undefined') && (result.data.message))
+            data.message = result.message;
+        else
+            data.message = data.level;
 
-            console.log(data);
-            logger.log(data.level, data);
+        if (environment.type === "development") {
+            if ((data.level === 'error') || (data.level === 'warn')) {
+                console.log(data.status, data.message, data.method + ': ' + data.endPoint);
+                console.log(result);
+            }
+            else {
+                console.log(data.status, data.message, data.method + ': ' + data.endPoint);
+            }
             return res.status(data.status).send(result);
         }
         else {
+            if (data.level === 'error') {
+                console.log(data.status, data.message, data.method + ': ' + data.endPoint);
+                console.log(result);
+            }
+            else {
+                console.log(data.status, data.message, data.method + ': ' + data.endPoint);
+            }
 
-            console.log(data);
-            logger.log(data.level, data);
+            logger.log(data.message, data);
+
             return res.status(data.status).send(result);
         }
+
     }
 };
 

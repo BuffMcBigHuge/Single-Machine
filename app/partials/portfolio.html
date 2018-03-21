@@ -21,7 +21,7 @@
 
         <form editable-form name="editableUser" onaftersave="saveUser()">
 
-            <div id="saveUser" class="navbar navbar-inverse navbar-fixed-top bg-white fast bottom-shadow" style="z-index:40" role="navigation" ng-show="editableUser.$visible">
+            <div id="saveUser" class="navbar navbar-fixed-top bg-white fast bottom-shadow" style="z-index:40" role="navigation" ng-show="editableUser.$visible">
                 <div class="container text-left">
                     <button type="submit" class="btn btn-md blue-button-4 mt-1x" ng-disabled="editableUser.$waiting">
                         SAVE
@@ -60,6 +60,7 @@
                         <!-- USER NAME -->
                         <div class="form-group no-margin pb-2x">
                             <h6 class="bold grey-dark-text-custom" ng-show="editableUser.$visible">Full Name</h6>
+
                             <div id="firstName" class="profile-font mt-1x" editable-text="data.user.displayName.firstName" e-name="firstName" e-placeholder="First Name" onbeforesave="checkData($data, 'first name')">{{data.user.displayName.firstName}}</div>
                             <div id="middleName" class="profile-font mt-1x" editable-text="data.user.displayName.middleName" e-name="middleName" e-placeholder="Middle Name" ng-hide="(!editMode && !data.user.displayName.middleName)">{{data.user.displayName.middleName}}</div>
                             <div id="lastName" class="profile-font mt-1x" editable-text="data.user.displayName.lastName" e-name="lastName" e-placeholder="Last Name" onbeforesave="checkData($data, 'last name')">{{data.user.displayName.lastName}}</div>

@@ -1,19 +1,94 @@
 angular.module('MyApp')
-    .factory("localStorage", function($window) {
+    .factory("localStorage", function($window, $rootScope) {
+
+        $rootScope.memoryStorage = {};
+
         return {
             setUser: function(user) {
-                $window.localStorage && $window.localStorage.setItem('user', JSON.stringify(user));
+
+                try {
+                    if (typeof $window.localStorage !== 'undefined') {
+                        $window.localStorage.setItem('user', JSON.stringify(user))
+                    }
+                    else {
+                        $rootScope.memoryStorage['user'] = JSON.stringify(user);
+                    }
+                }
+                catch (e) {
+                    console.warn('LocalStorage not available. Are you browsing privately?');
+                    $rootScope.memoryStorage['user'] = JSON.stringify(user);
+                }
+
                 return this;
             },
             getUser: function() {
-                return $window.localStorage && $window.localStorage.getItem('user');
+
+                var value;
+
+                try {
+
+                    if (typeof $window.localStorage !== 'undefined') {
+                        value = $window.localStorage.getItem('user') || $rootScope.memoryStorage['user'];
+                    }
+                    else {
+                        value = $rootScope.memoryStorage['user'];
+                    }
+                } catch (e) {
+                    console.warn('LocalStorage not available. Are you browsing privately?');
+                    value = $rootScope.memoryStorage['user'];
+                }
+
+                return value || null;
+
             },
-            setData: function(data) {
-                $window.localStorage && $window.localStorage.setItem('data', JSON.stringify(data));
+            setData: function(item, data) {
+
+                try {
+                    if (typeof $window.localStorage !== 'undefined') {
+                        $window.localStorage.setItem(item, JSON.stringify(data));
+                    }
+                    else {
+                        $rootScope.memoryStorage[item] = data;
+                    }
+                }
+                catch (err) {
+                    console.warn('LocalStorage not available. Are you browsing privately?');
+                    $rootScope.memoryStorage[item] = data;
+                }
+
                 return this;
             },
-            getData: function() {
-                return $window.localStorage && $window.localStorage.getItem('user');
+            getData: function(item) {
+
+                var value;
+
+                try {
+
+                    if (typeof $window.localStorage !== 'undefined') {
+                        value = $window.localStorage.getItem(item) || $rootScope.memoryStorage[item];
+                    }
+                    else {
+                        value = $rootScope.memoryStorage[item];
+                    }
+                } catch (e) {
+                    console.warn('LocalStorage not available. Are you browsing privately?');
+                    value = $rootScope.memoryStorage[item];
+                }
+
+                return value || null;
+
+            },
+            deleteData: function() {
+
+                try {
+                    $window.localStorage.setItem('user', null);
+                    $window.localStorage.removeItem('user');
+                    $window.localStorage.clear();
+                    window.localStorage.clear();
+                } catch(e) {
+                    $rootScope.memoryStorage = {};
+                }
+
             }
         };
     });

@@ -1,15 +1,18 @@
-angular.module('MyApp')
-    .controller('LogoutCtrl', ["$location", "$auth", "toastr", "$window",
-        function($location, $auth, toastr, $window) {
-        
-        if (!$auth.isAuthenticated())
-            return;
-        
-        $auth.logout()
-            .then(function() {
-                $window.localStorage.clear();
-                toastr.success('Logged Out');
+angular.module('MyApp').controller('LogoutCtrl', ["$scope", "$location", "$auth", "toastr", "$window", "localStorage", "$timeout",
+    function($scope, $location, $auth, toastr, $window, localStorage, $timeout) {
+
+        $scope.init = function() {
+
+            toastr.success('Logged Out');
+            $auth.logout();
+            //$window.location.reload();
+            localStorage.deleteData();
+
+            $timeout(function () {
+                localStorage.deleteData();
                 $location.path('/');
-                $window.location.reload();
-            });
-    }]);
+            }, 200);
+
+        }();
+
+}]);
