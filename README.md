@@ -93,6 +93,8 @@ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | b
 nvm install --lts
 sudo ln -s /usr/local/bin/node /usr/bin/node
 sudo ln -s /usr/local/bin/npm /usr/bin/npm
+sudo ln -s "$NVM_DIR/versions/node/$(nvm version)/bin/node" "/usr/local/bin/node"
+sudo ln -s "$NVM_DIR/versions/node/$(nvm version)/bin/npm" "/usr/local/bin/npm"
 ```
 
 4. Install Code Deploy Agent,

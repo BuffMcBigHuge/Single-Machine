@@ -45,11 +45,15 @@ gulp.task('minify-ejs', function(){
         .pipe(gulp.dest('app/assets'), {overwrite: true});
 });
 
-gulp.task('default', [
+gulp.task('default',
+    gulp.series(
     'minify-css',
     'minify-js',
-    'minify-ejs'
-]);
+    'minify-ejs',
+        function(done) {
+            done();
+        })
+);
 
 // EOF
 

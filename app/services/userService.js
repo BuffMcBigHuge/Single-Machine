@@ -5,30 +5,6 @@ angular.module('MyApp')
                 return $http.get('/api/v1/user/me');
             },
             updateProfile : function(data) {
-
-                try {
-                    if (!data.isBusiness) {
-                        var givenName = data.displayName.firstName || '';
-                        var surName = data.displayName.lastName || '';
-                    }
-                    else {
-                        var givenName = data.businessInfo.businessName || '';
-                        var surName = data.businessInfo.businessIndustry || '';
-                    }
-
-                    Smooch.updateUser({
-                        givenName: givenName,
-                        surname: surName,
-                        email: data.email || '',
-                        properties : {
-                            userId : data._id
-                        }
-                    });
-
-                } catch (e) {
-                    // Do nothing
-                }
-                
                 return $http.put('/api/v1/user/me', data);
             },
             getAllProfiles : function() {
