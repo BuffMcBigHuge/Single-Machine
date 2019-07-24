@@ -12,7 +12,8 @@ var moment = require('moment');
 var request = require('request');
 var router = express.Router();
 
-var User = mongoose.model('User', require('../models/user.js'));
+var User = require('../models/user.js');
+
 var config = require('../tools/config.json'); // Config
 var environment = config[process.env.NODE_ENV || 'development']; // Environment
 

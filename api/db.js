@@ -15,19 +15,11 @@ var environment = config[process.env.NODE_ENV || 'development']; // Environment
  |--------------------------------------------------------------------------
  */
 var options = {
-    server: {
-        socketOptions: {
-            keepAlive: 300000,
-            connectTimeoutMS: 30000
-        },
-        auto_reconnect: true
-    },
-    replset: {
-        socketOptions: {
-            keepAlive: 300000,
-            connectTimeoutMS : 30000
-        }
-    }
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    keepAlive: 300000,
+    connectTimeoutMS: 30000,
+    autoReconnect: true
 };
 
 var connection = mongoose.connection;
@@ -63,6 +55,8 @@ mongoose.connect(environment.mongo.uri, options);
 connection.on('error', function(err) {
     console.log('Error: Could not connect to MongoDB.'.red);
 });
+
+mongoose.Promise = require('q').Promise;
 
 module.exports = mongoose;
 

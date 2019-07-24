@@ -9,7 +9,7 @@
         "port": "4040",
         "hostname" : "localhost",
         "mongo" : {
-            "uri" : "localhost"
+            "uri" : "mongodb://localhost/test"
         },
         "https" : false,
         "loggly" : false,

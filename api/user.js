@@ -13,7 +13,7 @@ var path = require('path');
 var _ = require('underscore');
 var router = express.Router();
 
-var User = mongoose.model('User', require('../models/user.js'));
+var User = require('../models/user.js');
 var config = require('../tools/config.json'); // Config
 
 var Helpers = require("../tools/helpers.js");

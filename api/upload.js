@@ -14,7 +14,7 @@ var upload = multer();
 var moment = require('moment');
 
 var mongoose = require('mongoose');
-var User = mongoose.model('User', require('../models/user.js'));
+var User = require('../models/user.js');
 
 var Helpers = require("../tools/helpers.js");
 var ensureAuthenticated = Helpers.ensureAuthenticated;
