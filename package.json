@@ -32,6 +32,6 @@
     "q": "^1.5.1",
     "request": "^2.88.0",
     "sitemap": "^1.13.0",
-    "underscore": "^1.9.1"
+    "underscore": "^1.12.1"
   }
 }
