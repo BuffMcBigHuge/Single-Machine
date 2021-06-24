@@ -1,3 +1,4 @@
+> _Note: This repo is no longer maintained. I would advise a more modern ES6 boilerplate setup such as MEVN with webpack._
 # SINGLE MACHINE
 > A boilerplate MEAN app on a single server.
 
